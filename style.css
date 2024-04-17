@@ -1,0 +1,130 @@
+#rectangle{
+    width:20%;
+    height:50%;
+    background:blue;
+
+    position: fixed;
+    left: 90%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.marker {
+    width: 2%;
+
+    position: absolute;
+    transform: translate(-50%, -94%);
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    cursor: pointer;
+    padding: 18px;
+    width: 10%;
+    border: none;
+    outline: none;
+    font-size: 36px;
+
+    transform: translate(-50%, -50%);
+    position:absolute;
+    left: 0%;
+    top: 0%;
+    content: url(./images/plus.png);
+}
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.collapsible:hover {
+    color: blue;
+    filter: invert(100%);
+}
+
+.active {
+    content: url(./images/minus.png);
+}
+
+.content {
+    position:inherit;
+    top: 0%;
+    left: 0%;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsibleParent {
+
+    position:absolute;
+    left:50%;
+    top:50%;
+    width: 200px;
+}
+
+* {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 100px;
+  height: 40px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 1000px;
+  height: 300px;
+}
+
+
+* {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: absolute;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 250px;
+  height: 125px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 100%;
+  height: 100%;
+  position:absolute;
+}
+
+#myimage {
+    /* the coordinate of the zoom */
+    --x: 50%;
+    --y: 50%;
+    /**/
+    transform: scale(var(--zoom));
+    transform-origin: var(--x) var(--y);
+    clip-path: inset(
+      calc((1 - 1/var(--zoom)) * (var(--y)))
+      calc((1 - 1/var(--zoom)) * (100% - var(--x)))
+      calc((1 - 1/var(--zoom)) * (100% - var(--y)))
+      calc((1 - 1/var(--zoom)) * (var(--x)))
+    );
+    height: 100%;
+    width: 200%;
+    overflow:hidden;
+    cursor: crosshair;
+  }
+
+  body {
+    margin: 0px;
+    padding: 0px;
+    min-width: 1000px;
+  }
