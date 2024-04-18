@@ -1,0 +1,81 @@
+.marker-button {
+  height: 80%;
+
+  position: absolute;
+  left: 7%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.marker-button:hover {
+    content:url(../images/default-marker-hover.png);
+}
+
+.dividing-line {
+  background-color: rgb(171, 171, 171);
+
+  width: 1%;
+  height: 80%;
+
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+  left: 14%;
+  top: 50%;
+}
+
+.trashcan {
+  position:absolute;
+  height: 70%;
+
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 22%;
+}
+
+.magnifying-glass {
+  position: absolute;
+  transform: translate(-50%,-50%);
+
+  height: 60%;
+
+  top: 50%;
+  left: 37%;
+}
+
+.slider-container {
+    position: absolute;
+
+    transform: translate(0%, -50%);
+    width: 45%;
+    height: 15%;
+
+    top: 50%;
+    left: 42%;
+}
+
+.slider {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    -webkit-appearance: none;
+    appearance: none;
+    background: #d3d3d3; /* Grey background */
+
+    border-radius: 5px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+
+    background: gray;
+    width: 0.5vw;
+    height: 1.5vw;
+}

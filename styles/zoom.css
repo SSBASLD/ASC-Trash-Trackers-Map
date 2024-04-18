@@ -1,0 +1,46 @@
+* {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: absolute;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 250px;
+  height: 125px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 100%;
+  height: 100%;
+  position:absolute;
+}
+
+#myimage {
+    /* the coordinate of the zoom */
+    --x: 50%;
+    --y: 50%;
+    /**/
+    transform: scale(var(--zoom));
+    transform-origin: var(--x) var(--y);
+    clip-path: inset(
+      calc((1 - 1/var(--zoom)) * (var(--y)))
+      calc((1 - 1/var(--zoom)) * (100% - var(--x)))
+      calc((1 - 1/var(--zoom)) * (100% - var(--y)))
+      calc((1 - 1/var(--zoom)) * (var(--x)))
+    );
+    height: 100%;
+    width: 200%;
+    overflow:hidden;
+    cursor: crosshair;
+  }
+
+  body {
+    margin: 0px;
+    padding: 0px;
+    min-width: 1000px;
+  }

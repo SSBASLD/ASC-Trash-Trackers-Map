@@ -11,7 +11,7 @@ document.addEventListener("click", (event) => {
     img.style.top = event.y + "px";
 });
 
-let currentZoom = 5;
+let currentZoom = 3;
 
 var result = document.getElementById("myresult");
 
@@ -29,28 +29,6 @@ var pos = {x: lens.offsetWidth/2, y: lens.offsetHeight/2};
 var drag = false;
 var ogPos = {x: 0, y: 0};
 var lensOgPos = {x: 0, y: 0};
-
-document.addEventListener("keypress", (e) => {
-    if (e.key == "s") {
-        console.log(pos);
-
-        if (currentZoom == 1) return;
-
-        currentZoom--;
-        lens.style.height = `${img.offsetHeight / currentZoom}px`;
-        lens.style.width = `${img.offsetHeight / currentZoom * (window.innerWidth/window.innerHeight)}px`;
-        imageZoom(adjust = true);
-    } else if (e.key == "w") {
-        console.log(pos);
-
-        if (currentZoom == 5) return;
-
-        currentZoom++;
-        lens.style.height = `${img.offsetHeight / currentZoom}px`;
-        lens.style.width = `${img.offsetHeight / currentZoom * (window.innerWidth/window.innerHeight)}px`;
-        imageZoom(adjust = true);
-    }
-});
 
 
 var cx, cy;
@@ -82,7 +60,7 @@ function imageZoom(adjust) {
     /* Execute a function when someone moves the cursor over the image, or the lens: */
 }
 
-document.addEventListener("mousedown", (e) => {
+result.addEventListener("mousedown", (e) => {
     if (e.button == 0) {
         drag = true;
         ogPos.x = e.clientX;
@@ -90,12 +68,12 @@ document.addEventListener("mousedown", (e) => {
         lensOgPos = pos;
     }
 });
-document.addEventListener("mouseup", (e) => {
+result.addEventListener("mouseup", (e) => {
     if (e.button == 0) {
         drag = false;
     }
 });
-document.addEventListener("mousemove", (e) => {
+result.addEventListener("mousemove", (e) => {
     if (drag) {
         moveLens(e);
     }
@@ -132,17 +110,27 @@ function moveLens(e) {
 
 imageZoom();  
 
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
-  
-  for (i = 0; i < coll.length; i++) {
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
       this.classList.toggle("active");
       let parent = this.parentElement;
       if (parent.style.top == "50%"){
-        parent.style.top = `0%`;
+        parent.style.top = `${50-0.8*0.5*100}%`;
       } else {
         parent.style.top = `50%`;
       }
     });
-  }
+}
+var slider = document.getElementById("Zoom Slider");
+slider.oninput = function() {
+    let currentZoom = this.value;
+        
+    console.log(this.value);
+
+    lens.style.height = `${img.offsetHeight / currentZoom}px`;
+    lens.style.width = `${img.offsetHeight / currentZoom * (window.innerWidth/window.innerHeight)}px`;
+    imageZoom(adjust = true);
+}
