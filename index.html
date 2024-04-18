@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body id="body">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>My Website</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    </head>
+    <body id="body">
 
-    <div id="Collapsible Parent" class="collapsible-parent">
-      <button type="button" class="collapsible">Open Collapsible</button>
-      <div class="content">
-        <p>Lorem ipsum...</p>
-      </div>
-    </div>
-    <div class="img-zoom-container" style="display:none">
-        <img id="myimage1" src="./images/world-map-continents-oceans.webp" style="width: 50%">
-      </div>
-      
-      <div id="myresult" class="img-zoom-result" style="display: none;"></div>
-	<script src="script.js"></script>
-  </body>
+        <div id="Collapsible Parent" class="collapsible-parent">
+            <div id="Content Parent" class="content-parent">
+                <button type="button" class="collapsible">Open Collapsible</button>
+                <div class="content">
+                    <p>Lorem ipsum...</p>
+                </div>
+            </div>
+        </div>
+        <div class="img-zoom-container" style="display:none">
+            <img id="myimage1" src="./images/world-map-continents-oceans.webp" style="width: 50%">
+        </div>
+        
+        <div id="myresult" class="img-zoom-result" style="display: none;"></div>
+        <script src="script.js"></script>
+    </body>
 </html>

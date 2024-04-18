@@ -138,13 +138,11 @@ imageZoom();
   for (i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
       this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.top == "50%"){
-        this.style.top = `50%`;
-        content.style.top = `100%`;
+      let parent = this.parentElement;
+      if (parent.style.top == "50%"){
+        parent.style.top = `0%`;
       } else {
-        this.style.top = `0%`;
-        content.style.top = `50%`;
+        parent.style.top = `50%`;
       }
     });
   }

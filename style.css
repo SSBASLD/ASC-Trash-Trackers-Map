@@ -18,28 +18,42 @@
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-  background-color: #eee;
+    background-color: #eee;
   color: #444;
   cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  height: 50%;
+  width: 50%;
+  height: 66.67%;
   border: none;
   text-align: center;
   outline: none;
   font-size: 15px;
-  transform: translate(0%, 0%);
+  transform: translate(-50%, -100%);
 
   position:absolute;
-  left: 0%;
-  top: 50%;
+  left: 50%;
+  top: 100%;
 
   transition: top 0.2s ease-out;
+  content:url(./images/popup.png);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
+.collapsible:hover {
   background-color: #ccc;
+}
+
+.content-parent {
+    background-color: red;
+
+    transition: top 0.2s ease-in;
+
+    position:absolute;
+    left: 0%;
+    top: 50%;
+    width: 100%;
+    height: 50%;
 }
 
 /* Style the collapsible content. Note: hidden by default */
@@ -51,7 +65,7 @@
 
   position:absolute;
   width: 100%;
-  height: 50%;
+  height: 100%;
 
   left: 0%;
   top: 100%;
@@ -61,14 +75,13 @@
 
     position:absolute;
     left:50%;
-    top:50%;
+    top:100%;
     width: 300px;
     height: 150px;
-    transform: translate(-50%, -50%);
-
-    background-color: red;
+    transform: translate(-50%, -100%);
     overflow:hidden;
 }
+
 
 * {box-sizing: border-box;}
 
