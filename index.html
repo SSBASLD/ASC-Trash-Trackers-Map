@@ -10,17 +10,17 @@
   </head>
   <body id="body">
 
-    <div id="Collapsible Parent" class="collapsibleParent">
-        <img class="collapsible">
-        <div class="content">
-            <textarea style="resize:none; width: 200px; height: 150px;"></textarea>
-        </div>
+    <div id="Collapsible Parent" class="collapsible-parent">
+      <button type="button" class="collapsible">Open Collapsible</button>
+      <div class="content">
+        <p>Lorem ipsum...</p>
+      </div>
     </div>
-    <div class="img-zoom-container">
+    <div class="img-zoom-container" style="display:none">
         <img id="myimage1" src="./images/world-map-continents-oceans.webp" style="width: 50%">
       </div>
       
-      <div id="myresult" class="img-zoom-result"></div>
+      <div id="myresult" class="img-zoom-result" style="display: none;"></div>
 	<script src="script.js"></script>
   </body>
 </html>
