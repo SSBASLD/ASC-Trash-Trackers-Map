@@ -1,0 +1,69 @@
+.marker {
+    height: 100%;
+    transform:translate(-50%, -100%);
+    z-index: 10000000;
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    top: 100%;
+
+    content: url('../images/default-marker-outline.png');
+}
+
+.marker:hover {
+    content:url('../images/default-marker-outline-hover.png');
+}
+
+.marker-active {
+    content:url('../images/default-marker-outline-active.png');
+}
+
+.marker-parent {
+    width: 1.5%;
+    height: 5%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -100%);
+}
+
+.marker-collapsible {
+    height: 30%;
+    transform: translate(-50%, -50%);
+    z-index: 1000000;
+    position: absolute;
+    cursor: pointer;
+    left: 125%;
+    top:15%;
+
+    content: url('../images/plus.png');
+}
+
+.marker-collapsible-active {
+    content: url('../images/minus.png');
+}
+
+.marker-content-parent {
+    position: absolute;
+    width: 500%;
+    height:300%;
+
+    max-height:0;
+    transition: max-height 0.2s ease-in;
+
+    left: 160%;
+    overflow: hidden;
+}
+
+.marker-content {
+    position:absolute;
+    z-index:10000000;
+    height: 100%;
+    width: 100%;
+    
+    top: -10%;
+    transition: top 0.2s ease-in;
+
+    resize:none;
+}

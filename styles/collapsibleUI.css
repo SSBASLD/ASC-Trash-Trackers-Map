@@ -1,3 +1,7 @@
+.marker-button-active {
+  content:url(../images/default-marker-button.png);
+}
+
 .marker-button {
   height: 80%;
 
@@ -32,6 +36,22 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 22%;
+  content: url(../images/trashcan-default.png);
+  opacity: 0.5;
+}
+
+.trashcan-clickable {
+  opacity: 1;
+  content: url(../images/trashcan-default-clickable.png);
+  cursor: pointer;
+}
+
+.trashcan-hover {
+  content: url(../images/trashcan-hover.png);
+}
+
+.trashcan-click {
+  content: url(../images/trashcan.png);
 }
 
 .magnifying-glass {

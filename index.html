@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="./styles/collapsible.css">
         <link rel="stylesheet" href="./styles/collapsibleUI.css">
         <link rel="stylesheet" href="./styles/zoom.css">
+        <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/collapsibleMarker.css">
         <link rel="icon" href="./favicon.ico" type="image/x-icon">
+        <link rel="manifest" href="manifest.json">
     </head>
     <body id="body">
 
@@ -16,9 +19,9 @@
             <div id="Content Parent" class="content-parent">
                 <button type="button" class="collapsible"></button>
                 <div class="content">
-                    <img src="./images/default-marker.png" class="marker-button">
+                    <img src="./images/default-marker.png" class="marker-button" id="Marker Button">
                     <div class="dividing-line"></div>
-                    <img src="./images/trashcan.png" class="trashcan">
+                    <img class="trashcan" id="Trashcan">
                     <div class="dividing-line" style="left:30%"></div>
                     <img src="./images/magnifying-glass-minus.png" class="magnifying-glass">
                     <div class="slider-container">
@@ -31,7 +34,8 @@
         <div class="img-zoom-container">
             <img id="myimage1" src="./images/world-map-continents-oceans.webp" style="width: 50%">
         </div>
-        
+    
+
         <div id="myresult" class="img-zoom-result"></div>
         <script src="script.js"></script>
     </body>
