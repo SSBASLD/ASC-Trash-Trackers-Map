@@ -1,3 +1,26 @@
+function hasTouch() {
+    return 'ontouchstart' in document.documentElement
+           || navigator.maxTouchPoints > 0
+           || navigator.msMaxTouchPoints > 0;
+  }
+  
+  if (hasTouch()) { // remove all the :hover stylesheets
+    try { // prevent exception on browsers not supporting DOM styleSheets properly
+      for (var si in document.styleSheets) {
+        var styleSheet = document.styleSheets[si];
+        if (!styleSheet.rules) continue;
+  
+        for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+          if (!styleSheet.rules[ri].selectorText) continue;
+  
+          if (styleSheet.rules[ri].selectorText.match(':hover')) {
+            styleSheet.deleteRule(ri);
+          }
+        }
+      }
+    } catch (ex) {}
+  }
+
 let currentZoom = 3;
 
 var result = document.getElementById("myresult");
@@ -289,6 +312,10 @@ class Marker {
             }
         });
 
+        this.marker.addEventListener("touchstart", (e) => {
+            e.stopPropagation();
+        });
+
         this.collapsibleButton.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -305,12 +332,22 @@ class Marker {
             }
         });
 
+        this.collapsibleButton.addEventListener("touchstart", (e) => {
+            e.stopPropagation();
+        });
+
         this.content.addEventListener("click", (e) => {
             e.stopPropagation();
         })
+
+        this.content.addEventListener("touchstart", (e) => {
+            e.stopPropagation();
+        });
     }
 
     activate() {
+        console.log("activated");
+
         this.marker.classList.add("marker-active");        
         for (const marker of markers) {
             if (marker == this) {
@@ -353,6 +390,13 @@ class Marker {
 }
 
 document.addEventListener("click", (e) => {
+    for (const marker of markers) {
+        marker.deactivate();
+    }
+});
+
+document.addEventListener("touchstart", (e) => {
+    console.log("clicked");
     for (const marker of markers) {
         marker.deactivate();
     }
