@@ -1,3 +1,10 @@
+class Message {
+    constructor(header, content) {
+        this.header = header;
+        this.content = content;
+    }
+}
+
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 
@@ -32,12 +39,35 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
-            console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
-        }
-        else if (message.type === 'binary') {
-            console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
-            connection.sendBytes(message.binaryData);
+            try {
+                var jsonData = JSON.parse(message.data);
+                var header = jsonData.header;
+            } catch (e) {
+                console.log("Message data was not in JSON format");
+                console.error(e);
+                return;
+            } finally {
+                connection.isAlive = true;
+            }
+
+            switch (header) {
+                case 'Error':
+                    let content = jsonData.content;
+                    console.error(content);
+                    break;
+                case 'Update':
+                    console.log("hi");
+                    break;
+                case 'Post':
+                    break;
+                case 'Fetch':
+                    break;
+            }
+        } else {
+            let error = {header: 'Error', content: "Message not a string"};
+            let jsonData = JSON.stringify(error);
+
+            connection.send(jsonData);
         }
     });
     connection.on('close', function(reasonCode, description) {
