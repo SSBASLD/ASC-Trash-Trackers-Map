@@ -61,6 +61,10 @@ class Marker {
         this.content.addEventListener(onMobile ? "touchstart" : "click", (e) => {
             e.stopPropagation();
         })
+
+        this.content.oninput = (e) => {
+            this.text = this.content.value;
+        };
     }
 
     activate() {

@@ -35,7 +35,7 @@
 
   transform: translate(-50%, -50%);
   top: 50%;
-  left: 22%;
+  left: 21%;
   content: url(../images/trashcan-default.png);
   opacity: 0.5;
 }
@@ -54,6 +54,16 @@
   content: url(../images/trashcan.png);
 }
 
+.save-icon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  content: url(../images/save-icon-default.png);
+  height: 90%;
+
+  top: 50%;
+  left: 35%;
+}
+
 .magnifying-glass {
   position: absolute;
   transform: translate(-50%,-50%);
@@ -61,18 +71,18 @@
   height: 60%;
 
   top: 50%;
-  left: 37%;
+  left: 49%;
 }
 
 .slider-container {
     position: absolute;
 
-    transform: translate(0%, -50%);
-    width: 45%;
+    transform: translate(-50%, -50%);
+    width: 34%;
     height: 15%;
 
     top: 50%;
-    left: 42%;
+    left: 71%;
 }
 
 .slider {

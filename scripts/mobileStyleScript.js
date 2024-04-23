@@ -1,4 +1,6 @@
 if (onMobile) {
+    console.log("styled");
+
     let s = document.createElement("style");
     document.head.appendChild(s);
 
