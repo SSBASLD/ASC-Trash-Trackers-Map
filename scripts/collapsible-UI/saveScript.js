@@ -33,6 +33,6 @@ function markerDataToJSON() {
 
         markersData.push(markerData);
     }
-    
-    return JSON.stringify(markersData);
+
+    return markersData;
 }

@@ -45,9 +45,14 @@ function updateMarkers() {
 
     let id = localStorage.getItem("currentId");
     if (id == undefined) id = 1;
+    console.log(id);
+    console.log(markerData);
 
     let message = {header: "Update", target: id, data: markerData};
     let messageJSON = JSON.stringify(message);
+
+    console.log(messageJSON);
+    console.log(JSON.parse(messageJSON));
 
     client.send(messageJSON);
     console.log("sent");

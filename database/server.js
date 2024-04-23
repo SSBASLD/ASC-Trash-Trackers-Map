@@ -40,7 +40,7 @@ wsServer.on('request', function(request) {
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             try {
-                var jsonData = JSON.parse(message.data);
+                var jsonData = JSON.parse(message.utf8Data);
                 var header = jsonData.header;
             } catch (e) {
                 console.log("Message data was not in JSON format");
