@@ -1,10 +1,3 @@
-class Message {
-    constructor(header, content) {
-        this.header = header;
-        this.content = content;
-    }
-}
-
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var db = require("./index");
@@ -38,7 +31,7 @@ wsServer.on('request', function(request) {
 
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
-    connection.on('message', function(message) {
+    connection.on('message', async function(message) {
         if (message.type === 'utf8') {
             try {
                 var jsonData = JSON.parse(message.utf8Data);
@@ -59,9 +52,20 @@ wsServer.on('request', function(request) {
                 case 'Update':
                     let target = jsonData.target;
                     let data = jsonData.data;
-                    
-                    console.log("works?");
-                    db.update();
+        
+                    let response = await db.update(target, data);
+                    if (response == null) {
+                        let message = {header: "Error", content: "Failed to create/update the document"};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    } else {
+                        let message = {header: "Response", data: response};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    }
+
                     break;
                 case 'Post':
                     break;

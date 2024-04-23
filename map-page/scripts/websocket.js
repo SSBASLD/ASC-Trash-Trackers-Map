@@ -1,8 +1,10 @@
 var client;
 const autoReconnectDelay = 5000;
 
+var currentId = localStorage.getItem("currentId");
+
 async function setUpSocket() {
-    client = new WebSocket("wss://asc-trash-trackers-map-db.onrender.com/ws/", "echo-protocol");
+    client = new WebSocket("ws://localhost:8080", "echo-protocol");
     client.onopen = () => {
         client.connected = true;
         console.log("Connection Established");
@@ -17,7 +19,7 @@ async function setUpSocket() {
         }, autoReconnectDelay);
     }
 
-    client.onmessage = (message) => {
+    client.onmessage = async (message) => {
         try {
             var jsonData = JSON.parse(message.data);
             var header = jsonData.header;
@@ -35,28 +37,26 @@ async function setUpSocket() {
                 console.error(content);
                 break;
             case 'Response':
+                let response = jsonData.data;
+                if (currentId == undefined) {
+                    await localStorage.setItem("currentId", response.insertedId);
+                }
+                console.log(response);
+
                 break;
         }
     }
 }
 
-function updateMarkers() {
+async function updateMarkers() {
     let markerData = markerDataToJSON();
-
-    let id = localStorage.getItem("currentId");
-    if (id == undefined) id = 1;
-    console.log(id);
-    console.log(markerData);
 
     let data = {};
     data.markerData = markerData;
     data.lastModified = new Date();
 
-    let message = {header: "Update", target: id, data: data};
+    let message = {header: "Update", target: currentId, data: data};
     let messageJSON = JSON.stringify(message);
-
-    console.log(messageJSON);
-    console.log(JSON.parse(messageJSON));
 
     client.send(messageJSON);
     console.log("sent");

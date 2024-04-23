@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "startServer": "node database/server.js"
+    "startServer": "nodemon database/server.js"
   },
   "dependencies": {
     "express": "^4.19.2",
     "mongodb": "^6.5.0",
+    "nodemon": "^3.1.0",
     "websocket": "^1.0.34"
   },
   "keywords": [],
