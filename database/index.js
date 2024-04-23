@@ -11,10 +11,9 @@ const client = new MongoClient(uri, {
   }
 });
 
-await client.connect();
-
 async function update(targetId, data) {
   try {
+    await client.connect();
     const db = client.db('asc_trash_trackers_db');
     const maps = db.collection('maps');
 
@@ -34,6 +33,8 @@ async function update(targetId, data) {
     }
   } catch (e) {
     console.error(e);
+    await client.close();
+  } finally {
     await client.close();
   }
 }
