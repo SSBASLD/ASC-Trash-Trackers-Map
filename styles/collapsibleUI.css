@@ -64,6 +64,14 @@
   left: 35%;
 }
 
+.save-icon-hover {
+  content: url(../images/save-icon-hover.png);
+}
+
+.save-icon-click {
+  content: url(../images/save-icon-click.png);
+}
+
 .magnifying-glass {
   position: absolute;
   transform: translate(-50%,-50%);
