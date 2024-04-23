@@ -48,7 +48,11 @@ function updateMarkers() {
     console.log(id);
     console.log(markerData);
 
-    let message = {header: "Update", target: id, data: markerData};
+    let data = {};
+    data.markerData = markerData;
+    data.lastModified = new Date();
+
+    let message = {header: "Update", target: id, data: data};
     let messageJSON = JSON.stringify(message);
 
     console.log(messageJSON);

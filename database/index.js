@@ -11,18 +11,31 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function run() {
-    try {
-        await client.connect();
-        const db = client.db('sample_mflix');
-        const collection = db.collection('movies');
-        
-        // Find the first document in the collection
-        const first = await collection.findOne();
-        console.log(first);
-    } finally {
-        // Close the database connection when finished or an error occurs
-        await client.close();
+await client.connect();
+
+async function update(targetId, data) {
+  try {
+    const db = client.db('asc_trash_trackers_db');
+    const maps = db.collection('maps');
+
+    let map = await maps.findOne({_id: targetId});
+    if (map == null) {
+      await maps.insertOne({
+        markerData: data.markerData,
+        dateLastModified: data.lastModified,
+        dateCreated: data.lastModified
+      });
+    } else {
+      await maps.updateOne({_id: targetId}, {$set: {
+          markerData: data.markerData,
+          dateLastModified: data.lastModified
+        }
+      });
     }
+  } catch (e) {
+    console.error(e);
+    await client.close();
+  }
 }
-run().catch(console.error);
+
+exports.update = update;

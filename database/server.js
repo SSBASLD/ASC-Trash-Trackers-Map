@@ -7,6 +7,7 @@ class Message {
 
 var WebSocketServer = require('websocket').server;
 var http = require('http');
+var db = require("./index");
 
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
@@ -56,7 +57,11 @@ wsServer.on('request', function(request) {
                     console.error(content);
                     break;
                 case 'Update':
-                    console.log("hi");
+                    let target = jsonData.target;
+                    let data = jsonData.data;
+                    
+                    console.log("works?");
+                    db.update();
                     break;
                 case 'Post':
                     break;
