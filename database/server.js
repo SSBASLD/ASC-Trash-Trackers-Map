@@ -45,11 +45,11 @@ wsServer.on('request', function(request) {
             }
 
             switch (header) {
-                case 'Error':
+                case 'Error': {
                     let content = jsonData.content;
                     console.error(content);
                     break;
-                case 'Update':
+                } case 'Update': {
                     let target = jsonData.target;
                     let data = jsonData.data;
         
@@ -67,10 +67,25 @@ wsServer.on('request', function(request) {
                     }
 
                     break;
-                case 'Post':
+                } case 'Post': {
                     break;
-                case 'Fetch':
+                } case 'Fetch' : {
+                    let target = jsonData.target;
+
+                    let response = await db.fetch(target);
+                    if (response == null) {
+                        let message = {header: "Error", content: "No documents in the database or no document with target ID"};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    } else {
+                        let message = {header: "Response", data: response};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    }
                     break;
+                }
             }
         } else {
             let error = {header: 'Error', content: "Message not a string"};

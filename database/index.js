@@ -18,7 +18,7 @@ async function update(targetId, data) {
     const db = client.db('asc_trash_trackers_db');
     const maps = db.collection('maps');
 
-    let map = await maps.findOne({_id: ObjectId(targetId)});
+    let map = await maps.findOne({_id: new ObjectId(targetId)});
     if (map == null) {
       await maps.insertOne({
         markerData: data.markerData,
@@ -28,7 +28,7 @@ async function update(targetId, data) {
         response = dbResponse;
       });
     } else {
-      await maps.updateOne({_id: ObjectId(targetId)}, {$set: {
+      await maps.updateOne({_id: new ObjectId(targetId)}, {$set: {
           markerData: data.markerData,
           dateLastModified: data.lastModified
         }
@@ -45,4 +45,26 @@ async function update(targetId, data) {
   return response;
 }
 
+async function fetch(targetId) {
+  let response = null;
+  try {
+    await client.connect();
+    const db = client.db('asc_trash_trackers_db');
+    const maps = db.collection('maps');
+
+    if (targetId == "all") {
+      let cursor = maps.find();
+      response = await cursor.toArray();
+    } else {
+      response = await maps.findOne({_id: new ObjectId(targetId)});
+    }
+  } catch(e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+  return response;
+}
+
 exports.update = update;
+exports.fetch = fetch;
