@@ -18,7 +18,10 @@ async function update(targetId, data) {
     const db = client.db('asc_trash_trackers_db');
     const maps = db.collection('maps');
 
-    let map = await maps.findOne({_id: new ObjectId(targetId)});
+    let map;
+    if (targetId != "undefined") map = await maps.findOne({_id: new ObjectId(targetId)});
+    else map = null;
+
     if (map == null) {
       await maps.insertOne({
         markerData: data.markerData,

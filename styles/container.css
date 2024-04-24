@@ -1,0 +1,76 @@
+.container-parent {
+    position: absolute;
+    left: 1vw;
+
+    --layer: 0;
+    --numberInRow: 2;
+    --widthCalc: calc(calc(100vw - 2vw - (var(--numberInRow)*1vw - 1vw)) / var(--numberInRow));
+
+    top: calc(2vw + calc(2vw + 1/1.8 * var(--widthCalc))*var(--layer));
+
+    width: var(--widthCalc);
+    height: calc(1/1.8*var(--widthCalc));
+
+    border-width: 2px;
+    border-color: black;
+    border-style:solid;
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.container-button {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+
+    width: 100%;
+    height: 20%;
+    text-align: left;
+    font-size: 1vw;
+
+    padding-left: 0.4vw;
+}
+
+.container-button:after{
+    position: absolute;
+
+    transform: translate(0%, 50%);
+    right: 4%;
+
+    content:"Last accessed: 4/23/2024";
+    font-size: 0.5vw;
+    text-align: right;
+}
+
+.container {
+    position: absolute;
+
+    width: 100%;
+    height: 80%;
+
+    top: 20%;
+}
+
+.map-preview {
+    width: 100%;
+    height: 100%;
+
+    content: url("../map-page/images/world-map-continents-oceans.webp");
+}
+
+.marker-preview {
+    position: absolute;
+    transform: translate(-50%, -100%);
+
+    left: 50%;
+    top: 50%;
+    height: 15%;
+
+    content:url("../map-page/images/default-marker-outline.png");
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}

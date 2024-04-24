@@ -1,5 +1,5 @@
 .marker-button-active {
-  content:url(../images/default-marker-button.png);
+  content:url("../images/default-marker-button.png");
 }
 
 .marker-button {
@@ -13,7 +13,7 @@
 }
 
 .marker-button:hover {
-    content:url(../images/default-marker-hover.png);
+    content:url("../images/default-marker-hover.png");
 }
 
 .dividing-line {
@@ -36,28 +36,28 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 21%;
-  content: url(../images/trashcan-default.png);
+  content: url("../images/trashcan-default.png");
   opacity: 0.5;
 }
 
 .trashcan-clickable {
   opacity: 1;
-  content: url(../images/trashcan-default-clickable.png);
+  content: url("../images/trashcan-default-clickable.png");
   cursor: pointer;
 }
 
 .trashcan-hover {
-  content: url(../images/trashcan-hover.png);
+  content: url("../images/trashcan-hover.png");
 }
 
 .trashcan-click {
-  content: url(../images/trashcan.png);
+  content: url("../images/trashcan.png");
 }
 
 .save-icon {
   position: absolute;
   transform: translate(-50%, -50%);
-  content: url(../images/save-icon-default.png);
+  content: url("../images/save-icon-default.png");
   height: 90%;
 
   top: 50%;
@@ -65,11 +65,11 @@
 }
 
 .save-icon-hover {
-  content: url(../images/save-icon-hover.png);
+  content: url("../images/save-icon-hover.png");
 }
 
 .save-icon-click {
-  content: url(../images/save-icon-click.png);
+  content: url("../images/save-icon-click.png");
 }
 
 .magnifying-glass {
