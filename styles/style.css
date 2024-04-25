@@ -1,6 +1,6 @@
 .circle {
-    position: absolute;
-    background-color: lightgrey;
+    position: fixed;
+    background-color: aliceblue;
 
     border: solid;
     border-color: black;
@@ -12,6 +12,37 @@
 
     top: 99vh;
     left: 99vw;
+
+    cursor: pointer;
+    z-index: 100;
+}
+
+.circle-deactivated {
+    opacity: 0.6;
+    cursor:auto;
+
+    position:fixed;
+    background-color: aliceblue;
+
+    border: solid;
+    border-color: black;
+    border-radius: 50%;
+
+    height: 8vh;
+    width: 8vh;
+    transform: translate(-100%, -100%);
+
+    top: 99vh;
+    left: 99vw;
+    z-index: 100;
+}
+
+.circle:hover {
+    background-color: lightgrey;
+}
+
+.circle:active {
+    background-color:grey;
 }
 
 .circle-plus {
@@ -35,5 +66,5 @@
 
     height: 60%;
 
-    content: url(../map-page/images/trashcan-default-clickable.png);
+    content: url(../map-page/images/trashcan.png);
 }

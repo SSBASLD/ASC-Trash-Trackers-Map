@@ -67,8 +67,6 @@ wsServer.on('request', function(request) {
                     }
 
                     break;
-                } case 'Post': {
-                    break;
                 } case 'Fetch' : {
                     let target = jsonData.target;
 
@@ -79,7 +77,37 @@ wsServer.on('request', function(request) {
 
                         connection.send(messageData);
                     } else {
-                        let message = {header: "Response", data: response};
+                        let message = {header: "Response", type:"FetchResponse", data: response};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    }
+                    break;
+                } case 'Delete': {
+                    let target = jsonData.target;
+                    let response = await db.delete(target);
+                    if (response == null) {
+                        let message = {header: "Error", content: "Could not delete the specified document"};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    } else {
+                        let message = {header: "Response", type: "AcknowledgeResponse", data: response};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    }
+                    break;
+                } case 'Create': {
+                    let time = jsonData.time;
+                    let response = await db.add(time);
+                    if (response == null) {
+                        let message = {header: "Error", content: "Could not create a document in the database"};
+                        let messageData = JSON.stringify(message);
+
+                        connection.send(messageData);
+                    } else {
+                        let message = {header: "Response", type: "AcknowledgeResponse", data: response};
                         let messageData = JSON.stringify(message);
 
                         connection.send(messageData);

@@ -1,8 +1,41 @@
+let onMobile = false;
+
+function hasTouch() {
+  return 'ontouchstart' in document.documentElement
+         || navigator.maxTouchPoints > 0
+         || navigator.msMaxTouchPoints > 0;
+}
+
+if (hasTouch()) { // remove all the :hover stylesheets
+  onMobile = true;
+
+  try { // prevent exception on browsers not supporting DOM styleSheets properly
+    for (var si in document.styleSheets) {
+      var styleSheet = document.styleSheets[si];
+      if (!styleSheet.rules) continue;
+
+      for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+        if (!styleSheet.rules[ri].selectorText) continue;
+
+        if (styleSheet.rules[ri].selectorText.match(':hover')) {
+          styleSheet.deleteRule(ri);
+        }
+      }
+    }
+  } catch (ex) {}
+}
+
+let trashcanButton = document.getElementById("Delete Map Button");
+let plusButton = document.getElementById("Add Map Button");
+
 const numberInRow = 4;
 
 let currentPos = {x: 1, y: 0};
 class Preview {
-    constructor(pos, markerData) {
+    constructor(id, pos, markerData, dateCreated, dateLastModified) {
+        this.id = id;
+        this.active = 0;
+
         this.x = pos.x;
         this.y = pos.y
 
@@ -19,6 +52,14 @@ class Preview {
         this.containerButton.className = "container-button";
         this.containerParent.appendChild(this.containerButton);
 
+        this.containerButton.innerHTML = dateCreated;
+
+        this.containerButtonText = document.createElement("div");
+        this.containerButtonText.className = "container-button-text";
+        this.containerButton.appendChild(this.containerButtonText);
+
+        this.containerButtonText.innerHTML = `Last Accessed: ${dateLastModified}`
+
         this.container = document.createElement("div");
         this.container.className = "container";
         this.containerParent.appendChild(this.container);
@@ -28,7 +69,20 @@ class Preview {
         this.container.appendChild(this.preview);
 
         this.renderMarkers(markerData);
-        this.containerButton.addEventListener();
+        this.containerButton.addEventListener(onMobile ? "touchstart" : "click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            this.active++;
+
+            console.log(this.active);
+
+            if (this.active == 1) {
+                this.activate();
+            } else if (this.active == 2) {
+                goToMapPage(this.id);
+            }
+        });
     }
 
     renderMarkers(markerData) {
@@ -47,6 +101,31 @@ class Preview {
         }
     }
 
+    activate() {
+        for (const preview of previews) {
+            if (preview == this) continue;
+
+            preview.deactivate();
+        }
+
+        trashcanButton.classList.remove("circle-deactivated");
+        trashcanButton.classList.add("circle");
+
+        trashcanButton.addEventListener(onMobile ? "touchstart" : "click", deletePreview);
+
+        this.containerParent.classList.add("container-parent-active");
+    }
+
+    deactivate() {
+        trashcanButton.classList.remove("circle");
+        trashcanButton.classList.add("circle-deactivated");
+
+        trashcanButton.removeEventListener(onMobile ? "touchstart" : "click", deletePreview);
+
+        this.active = 0;
+        this.containerParent.classList.remove("container-parent-active");
+    }
+
     static setNextPos() {
         if (currentPos.x == ((100 - 2 - (numberInRow - 1))/numberInRow + 1) * (numberInRow - 1) + 1) {
             currentPos.x = 1;
@@ -58,7 +137,34 @@ class Preview {
 let previews = [];
 function setUpPreviews(data) {
     for (const map of data) {
-        previews.push(new Preview(currentPos, map.markerData));
+        previews.push(new Preview(map._id, currentPos, map.markerData, map.dateCreated, map.dateLastModified));
         Preview.setNextPos();
     }
+}
+
+document.addEventListener(onMobile ? "touchstart" : "click", (e) => {
+    for (const preview of previews) {
+        preview.deactivate();
+    }
+});
+
+function deletePreview(e) {
+    let activePreview = previews.find(preview => preview.active);
+
+    activePreview.containerParent.remove();
+    previews.splice(previews.indexOf(activePreview), 1);
+
+    deleteMap(activePreview.id);
+}
+
+plusButton.addEventListener(onMobile ? "touchstart" : "click", (e) => {
+    let date = new Date();
+    addMap(`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`);
+});
+
+async function goToMapPage(id) {
+    console.log("ran");
+
+    await localStorage.setItem("currentId", id);
+    window.location.href += "/map-page/index.html";
 }

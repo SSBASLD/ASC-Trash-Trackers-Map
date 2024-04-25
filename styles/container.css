@@ -11,12 +11,16 @@
     width: var(--widthCalc);
     height: calc(1/1.8*var(--widthCalc));
 
-    border-width: 2px;
+    border-width: 0.3vw;
     border-color: black;
     border-style:solid;
     border-radius:20px;
 
     overflow:hidden;
+}
+
+.container-parent-active {
+    border-color: blue;
 }
 
 .container-button {
@@ -27,20 +31,22 @@
     width: 100%;
     height: 20%;
     text-align: left;
-    font-size: 1vw;
+    font-size:2vmax;
 
     padding-left: 0.4vw;
 }
 
-.container-button:after{
+.container-button-text {
     position: absolute;
-
-    transform: translate(0%, 50%);
-    right: 4%;
-
-    content:"Last accessed: 4/23/2024";
-    font-size: 0.5vw;
+    transform: translate(0%, -50%);
     text-align: right;
+    font-size: 0.7vmax;
+
+    top: 85%;
+    right: 0%;
+
+    height: 0.7vmax;
+    width: 100%;
 }
 
 .container {

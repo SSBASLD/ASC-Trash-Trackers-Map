@@ -24,5 +24,3 @@ if (hasTouch()) { // remove all the :hover stylesheets
     }
   } catch (ex) {}
 }
-
-console.log(onMobile);

@@ -69,5 +69,45 @@ async function fetch(targetId) {
   return response;
 }
 
+async function deleteTarget(targetId) {
+  let response = null;
+  try {
+    await client.connect();
+    const db = client.db('asc_trash_trackers_db');
+    const maps = db.collection('maps');
+
+    await maps.deleteOne({
+      _id: new ObjectId(targetId)
+    }).then(dbResponse => response = dbResponse);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+  return response;
+}
+
+async function add(time) {
+  let response = null;
+  try {
+    await client.connect();
+    const db = client.db('asc_trash_trackers_db');
+    const maps = db.collection('maps');
+
+    await maps.insertOne({
+      dateCreated: time,
+      dateLastModified: time,
+      markerData: []
+    }).then(dbResponse => response = dbResponse);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+  return response;
+}
+
 exports.update = update;
 exports.fetch = fetch;
+exports.delete = deleteTarget;
+exports.add = add;

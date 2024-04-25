@@ -53,7 +53,9 @@ async function updateMarkers() {
 
     let data = {};
     data.markerData = markerData;
-    data.lastModified = new Date();
+
+    let currentDate = new Date();
+    data.lastModified = `${currentDate.getMonth()}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
     let message = {header: "Update", target: currentId, data: data};
     let messageJSON = JSON.stringify(message);

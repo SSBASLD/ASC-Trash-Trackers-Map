@@ -36,17 +36,43 @@ async function setUpSocket() {
                 let content = jsonData.content;
                 console.error(content);
                 break;
-            case 'Response':
-                let response = jsonData.data;
+            case 'Response': {
+                let type = jsonData.type;
+                switch(type) {
+                    case "FetchResponse": {
+                        let response = jsonData.data;
 
-                setUpPreviews(response);
+                        console.log(response);
+
+                        setUpPreviews(response);
+                        break;
+                    } case "AcknowledgeResponse": {
+                        window.location.reload();
+                        break;
+                    }
+                }
                 break;
+            }
         }
     }
 }
 
 async function fetchMaps() {
     let message = {header: "Fetch", target: "all"};
+    let messageJSON = JSON.stringify(message);
+
+    setTimeout(() => {client.send(messageJSON);}, 1000);
+}
+
+function deleteMap(id) {
+    let message = {header: "Delete", target: id};
+    let messageJSON = JSON.stringify(message);
+
+    client.send(messageJSON);
+}
+
+function addMap(date) {
+    let message = {header: "Create", time: date};
     let messageJSON = JSON.stringify(message);
 
     client.send(messageJSON);
