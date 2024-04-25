@@ -35,6 +35,7 @@ class Preview {
     constructor(id, pos, markerData, dateCreated, dateLastModified) {
         this.id = id;
         this.active = 0;
+        this.markerData = markerData;
 
         this.x = pos.x;
         this.y = pos.y
@@ -80,7 +81,7 @@ class Preview {
             if (this.active == 1) {
                 this.activate();
             } else if (this.active == 2) {
-                goToMapPage(this.id);
+                goToMapPage(this.id, this.markerData);
             }
         });
     }
@@ -162,9 +163,10 @@ plusButton.addEventListener(onMobile ? "touchstart" : "click", (e) => {
     addMap(`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`);
 });
 
-async function goToMapPage(id) {
+async function goToMapPage(id, markerData) {
     console.log("ran");
 
     await localStorage.setItem("currentId", id);
+    await localStorage.setItem("currentMarkerData", JSON.stringify(markerData));
     window.location.href += "/map-page/index.html";
 }

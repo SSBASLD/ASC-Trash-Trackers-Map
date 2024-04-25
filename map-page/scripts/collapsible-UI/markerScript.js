@@ -111,6 +111,15 @@ class Marker {
     }
 }
 
+let currentMarkerData = JSON.parse(localStorage.getItem("currentMarkerData"));
+for (const marker of currentMarkerData) {
+    let markerObject = new Marker({x: marker.x, y: marker.y});
+    markers.push(markerObject);
+
+    renderMarkers(pos);
+}
+
+
 var markerButton = document.getElementById("Marker Button");
 
 let floatingMarker;
