@@ -87,14 +87,14 @@ class Preview {
     }
 
     renderMarkers(markerData) {
-        let cx = window.innerWidth/2 / this.preview.offsetWidth;
-        let cy = window.innerWidth/4 / this.preview.offsetHeight;
-    
         let markers = markerData;
         for (const marker of markers) {
+            let cx = marker.ogWidth / this.preview.offsetWidth;
+            let cy = marker.ogHeight / this.preview.offsetHeight;
+
             let markerImage = new Image();
             markerImage.className = "marker-preview";
-    
+
             markerImage.style.top = `${marker.y * 1/cy}px`;
             markerImage.style.left = `${marker.x * 1/cx}px`;
 
@@ -164,8 +164,6 @@ plusButton.addEventListener(onMobile ? "touchstart" : "click", (e) => {
 });
 
 async function goToMapPage(id, markerData) {
-    console.log("ran");
-
     await localStorage.setItem("currentId", id);
     await localStorage.setItem("currentMarkerData", JSON.stringify(markerData));
     window.location.href += "/map-page/index.html";

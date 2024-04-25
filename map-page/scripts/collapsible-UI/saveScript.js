@@ -31,6 +31,9 @@ function markerDataToJSON() {
 
         markerData.text = marker.text ? marker.text : "";
 
+        markerData.ogWidth = img.offsetWidth;
+        markerData.ogHeight = img.offsetHeight;
+
         markersData.push(markerData);
     }
 

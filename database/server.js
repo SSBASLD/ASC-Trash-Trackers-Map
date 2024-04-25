@@ -68,6 +68,8 @@ wsServer.on('request', function(request) {
 
                     break;
                 } case 'Fetch' : {
+                    console.log("fetching");
+                    
                     let target = jsonData.target;
 
                     let response = await db.fetch(target);

@@ -55,6 +55,8 @@ async function fetch(targetId) {
     const db = client.db('asc_trash_trackers_db');
     const maps = db.collection('maps');
 
+    console.log("a");
+
     if (targetId == "all") {
       let cursor = maps.find();
       response = await cursor.toArray();
@@ -62,6 +64,7 @@ async function fetch(targetId) {
       response = await maps.findOne({_id: new ObjectId(targetId)});
     }
   } catch(e) {
+    console.log("error");
     console.error(e);
   } finally {
     await client.close();

@@ -1,9 +1,13 @@
 let markers = [];
 
 class Marker {
-    constructor(pos) {
+    constructor(pos, ogWidth, ogHeight) {
         this.x = pos.x;
         this.y = pos.y;
+
+        this.ogWidth = ogWidth;
+        this.ogHeight = ogHeight;
+
         this.active = false;
         this.collapsibleActive = false;
 
@@ -113,7 +117,7 @@ class Marker {
 
 let currentMarkerData = JSON.parse(localStorage.getItem("currentMarkerData"));
 for (const marker of currentMarkerData) {
-    let markerObject = new Marker({x: marker.x, y: marker.y});
+    let markerObject = new Marker({x: marker.x, y: marker.y}, marker.ogWidth, marker.ogHeight);
     markers.push(markerObject);
 
     renderMarkers(pos);
@@ -199,7 +203,10 @@ function renderMarkers(lensPos) {
     for (const marker of markers) {
         if (leftBoundary < marker.x && marker.x < rightBoundary && topBoundary < marker.y && marker.y < bottomBoundary) {
             marker.markerParent.style.display = "block";
-            let distanceFromCenter = {x: lensPos.x - marker.x, y: lensPos.y - marker.y};
+            let actualX = marker.x * img.offsetWidth / marker.ogWidth;
+            let actualY = marker.x * img.offsetHeight / marker.ogHeight;
+
+            let distanceFromCenter = {x: lensPos.x - actualX, y: lensPos.y - actualY};
             let realPos = {x: window.innerWidth/2 - (cx * distanceFromCenter.x), y: window.innerHeight/2 - (cy * distanceFromCenter.y)};
 
             marker.move(realPos);
