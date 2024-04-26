@@ -40,6 +40,8 @@ function markerDataToJSON() {
 
         markerData.text = marker.text ? marker.text : "";
 
+        console.log(marker.text);
+
         markerData.ogWidth = marker.ogWidth;
         markerData.ogHeight = marker.ogHeight;
 

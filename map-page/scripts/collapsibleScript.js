@@ -1,4 +1,5 @@
 var coll = document.getElementById("Collapsible");
+coll.parentElement.style.top = "50%";
 
 coll.addEventListener("click", function(e) {
     e.preventDefault();

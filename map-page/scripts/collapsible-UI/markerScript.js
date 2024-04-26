@@ -121,6 +121,8 @@ class Marker {
 let currentMarkerData = JSON.parse(localStorage.getItem("currentMarkerData"));
 for (const marker of currentMarkerData) {
     let markerObject = new Marker({x: marker.x, y: marker.y}, marker.ogWidth, marker.ogHeight, marker.text);
+    console.log(marker.text);
+
     markers.push(markerObject);
 }
 

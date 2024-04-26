@@ -4,7 +4,7 @@ const autoReconnectDelay = 5000;
 var currentId = localStorage.getItem("currentId");
 
 async function setUpSocket() {
-    client = new WebSocket("ws://localhost:8080", "echo-protocol");
+    client = new WebSocket("wss://asc-trash-trackers-map-db.onrender.com/ws/", "echo-protocol");
     client.onopen = () => {
         saveIconEnable();
 
