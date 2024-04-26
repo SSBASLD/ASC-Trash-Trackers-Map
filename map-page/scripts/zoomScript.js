@@ -83,15 +83,24 @@ var slider = document.getElementById("Zoom Slider");
 slider.oninput = function() {
     let currentZoom = this.value;
 
+    console.log(currentZoom);
+
     let zoomedWidth = lensWidth / currentZoom;
     let zoomedHeight = lensHeight / currentZoom;
 
-    console.log(zoomedWidth);
+    if (window.innerHeight > window.innerWidth) {
+        if (zoomedHeight > img.offsetHeight) {
+            zoomedHeight = img.offsetHeight;
+            zoomedWidth = zoomedHeight * window.innerWidth/window.innerHeight;
+        } 
+    } else if (window.innerWidth > window.innerHeight) {
+        if (zoomedWidth > img.offsetWidth) {
+            zoomedWidth = img.offsetWidth;
+            zoomedHeight = zoomedWidth * window.innerHeight/window.innerWidth;
+        } 
+    }   
 
-    if (zoomedWidth > img.offsetWidth) {
-        zoomedWidth = img.offsetWidth;
-        zoomedHeight = zoomedWidth * window.innerHeight/window.innerWidth;
-    }
+    console.log(zoomedHeight);
 
     lens.style.height = `${zoomedHeight}px`;
     lens.style.width = `${zoomedWidth}px`;

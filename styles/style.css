@@ -32,7 +32,7 @@
     width: 8vh;
     transform: translate(-100%, -100%);
 
-    top: 99vh;
+    top: 99%;
     left: 99vw;
     z-index: 100;
 }
