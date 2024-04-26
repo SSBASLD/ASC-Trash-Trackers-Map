@@ -32,4 +32,5 @@ function enable() {
 
 function disable() {
     loadingScreen.style.display = "block";
+    clearPreviews();
 }

@@ -142,3 +142,12 @@ async function goToMapPage(id, markerData) {
     await localStorage.setItem("currentMarkerData", JSON.stringify(markerData));
     window.location.href += "/map-page/index.html";
 }
+
+function clearPreviews() {
+    for (const preview of previews) {
+        preview.containerParent.remove();
+    }
+
+    previews = [];
+    currentPos = {x: 1, y: 0};
+}

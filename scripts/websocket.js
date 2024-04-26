@@ -14,6 +14,8 @@ async function setUpSocket() {
         console.log("echo-protocol Client closed");
         console.log(e.reason);
 
+        disable();
+
         setTimeout(() => {
             setUpSocket();
         }, autoReconnectDelay);

@@ -6,15 +6,13 @@ var img = document.getElementById("myimage1");
 var lens;
 lens = document.createElement("DIV");
 lens.setAttribute("class", "img-zoom-lens");
-
-console.log(window.innerHeight);
-console.log(window.innerWidth);
-
-lens.style.height = `${window.innerHeight / currentZoom}px`;
-lens.style.width = `${window.innerWidth / currentZoom}px`;
+img.parentElement.insertBefore(lens, img);
 
 let lensHeight = window.innerHeight;
 let lensWidth = window.innerWidth;
+
+lens.style.height = `${lensHeight / currentZoom}px`;
+lens.style.width = `${lensWidth / currentZoom}px`;
 
 var pos = {x: lensWidth / currentZoom / 2, y: lensHeight / currentZoom / 2};
 var drag = false;
@@ -25,7 +23,7 @@ lens.style.left = pos.x + "px";
 lens.style.top = pos.y + "px";
 
 var cx, cy;
-function imageZoom(adjust) {
+function imageZoom() {
     if (pos.x > img.offsetWidth - lens.offsetWidth/2) {
         pos.x = img.offsetWidth - lens.offsetWidth/2;
     }
@@ -41,7 +39,6 @@ function imageZoom(adjust) {
     /* Set the position of the lens: */
     lens.style.left = pos.x + "px";
     lens.style.top = pos.y + "px";
-    img.parentElement.insertBefore(lens, img);
     /* Calculate the ratio between result DIV and lens: */
     cx = result.offsetWidth / lens.offsetWidth;
     cy = result.offsetHeight / lens.offsetHeight;
