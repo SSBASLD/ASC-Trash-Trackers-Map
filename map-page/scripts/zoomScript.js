@@ -36,6 +36,9 @@ function imageZoom() {
     if (pos.y < lens.offsetHeight/2) {
         pos.y = lens.offsetHeight/2;
     }
+    console.log(img.offsetWidth);
+    console.log(img.offsetHeight);
+
     /* Set the position of the lens: */
     lens.style.left = pos.x + "px";
     lens.style.top = pos.y + "px";
