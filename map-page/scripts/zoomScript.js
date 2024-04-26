@@ -6,6 +6,10 @@ var img = document.getElementById("myimage1");
 var lens;
 lens = document.createElement("DIV");
 lens.setAttribute("class", "img-zoom-lens");
+
+console.log(window.innerHeight);
+console.log(window.innerWidth);
+
 lens.style.height = `${window.innerHeight / currentZoom}px`;
 lens.style.width = `${window.innerWidth / currentZoom}px`;
 
@@ -82,8 +86,6 @@ imageZoom();
 var slider = document.getElementById("Zoom Slider");
 slider.oninput = function() {
     let currentZoom = this.value;
-
-    console.log(currentZoom);
 
     let zoomedWidth = lensWidth / currentZoom;
     let zoomedHeight = lensHeight / currentZoom;
