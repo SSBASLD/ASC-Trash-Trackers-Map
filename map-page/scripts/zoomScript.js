@@ -8,6 +8,16 @@ lens = document.createElement("DIV");
 lens.setAttribute("class", "img-zoom-lens");
 img.parentElement.insertBefore(lens, img);
 
+let imgWidth = 0;
+let imgHeight = 0;
+while (imgWidth == 0 || imgHeight == 0) {
+    imgHeight = img.offsetHeight;
+    imgWidth = img.offsetWidth;
+}
+
+console.log(imgHeight);
+console.log(imgWidth);
+
 let lensHeight = window.innerHeight;
 let lensWidth = window.innerWidth;
 
@@ -24,20 +34,18 @@ lens.style.top = pos.y + "px";
 
 var cx, cy;
 function imageZoom() {
-    if (pos.x > img.offsetWidth - lens.offsetWidth/2) {
-        pos.x = img.offsetWidth - lens.offsetWidth/2;
+    if (pos.x > imgWidth - lens.offsetWidth/2) {
+        pos.x = imgWidth - lens.offsetWidth/2;
     }
     if (pos.x < lens.offsetWidth/2) {
         pos.x = lens.offsetWidth/2;
     }
-    if (pos.y > img.offsetHeight - lens.offsetHeight/2) {
-        pos.y = img.offsetHeight - lens.offsetHeight/2;
+    if (pos.y > imgHeight - lens.offsetHeight/2) {
+        pos.y = imgHeight - lens.offsetHeight/2;
     }
     if (pos.y < lens.offsetHeight/2) {
         pos.y = lens.offsetHeight/2;
     }
-    console.log(img.offsetWidth);
-    console.log(img.offsetHeight);
 
     /* Set the position of the lens: */
     lens.style.left = pos.x + "px";
@@ -48,7 +56,7 @@ function imageZoom() {
 
     /* Set background properties for the result DIV */
     result.style.backgroundImage = "url('" + img.src + "')";
-    result.style.backgroundSize = (img.offsetWidth * cx) + "px " + (img.offsetHeight * cy) + "px";
+    result.style.backgroundSize = (imgWidth * cx) + "px " + (imgHeight * cy) + "px";
     result.style.backgroundPosition = "-" + ((pos.x - lens.offsetWidth/2) * cx) + "px -" + ((pos.y - lens.offsetHeight/2) * cy) + "px";
     /* Execute a function when someone moves the cursor over the image, or the lens: */
 }
@@ -61,14 +69,14 @@ function moveLens(mousePos) {
     pos = {x: lensOgPos.x + (1/cx * distanceFromOg.x), y: lensOgPos.y + (1/cy * distanceFromOg.y)};
 
     /* Prevent the lens from being positioned outside the image: */
-    if (pos.x > img.offsetWidth - lens.offsetWidth/2) {
-        pos.x = img.offsetWidth - lens.offsetWidth/2;
+    if (pos.x > imgWidth - lens.offsetWidth/2) {
+        pos.x = imgWidth - lens.offsetWidth/2;
     }
     if (pos.x < lens.offsetWidth/2) {
         pos.x = lens.offsetWidth/2;
     }
-    if (pos.y > img.offsetHeight - lens.offsetHeight/2) {
-        pos.y = img.offsetHeight - lens.offsetHeight/2;
+    if (pos.y > imgHeight - lens.offsetHeight/2) {
+        pos.y = imgHeight - lens.offsetHeight/2;
     }
     if (pos.y < lens.offsetHeight/2) {
         pos.y = lens.offsetHeight/2;
@@ -91,8 +99,8 @@ slider.oninput = function() {
     let zoomedHeight = lensHeight / currentZoom;
 
     if (window.innerHeight > window.innerWidth) {
-        if (zoomedHeight > img.offsetHeight) {
-            zoomedHeight = img.offsetHeight;
+        if (zoomedHeight > imgHeight) {
+            zoomedHeight = imgHeight;
             zoomedWidth = zoomedHeight * window.innerWidth/window.innerHeight;
         } 
     } else if (window.innerWidth > window.innerHeight) {
