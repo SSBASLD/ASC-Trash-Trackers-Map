@@ -6,11 +6,15 @@ var currentId = localStorage.getItem("currentId");
 async function setUpSocket() {
     client = new WebSocket("ws://localhost:8080", "echo-protocol");
     client.onopen = () => {
+        saveIconEnable();
+
         client.connected = true;
         console.log("Connection Established");
     }
 
     client.onclose = (e) => {
+        saveIconDisable();
+
         console.log("echo-protocol Client closed");
         console.log(e.reason);
 
@@ -61,7 +65,6 @@ async function updateMarkers() {
     let messageJSON = JSON.stringify(message);
 
     client.send(messageJSON);
-    console.log("sent");
 }
 
 setUpSocket();

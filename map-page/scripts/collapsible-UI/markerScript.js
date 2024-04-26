@@ -1,9 +1,11 @@
 let markers = [];
 
 class Marker {
-    constructor(pos, ogWidth, ogHeight) {
+    constructor(pos, ogWidth, ogHeight, text) {
         this.x = pos.x;
         this.y = pos.y;
+
+        this.text = text;
 
         this.ogWidth = ogWidth;
         this.ogHeight = ogHeight;
@@ -31,6 +33,7 @@ class Marker {
         this.content = document.createElement("textarea");
         this.content.className = "marker-content";
         this.contentParent.appendChild(this.content);
+        this.content.value = this.text;
 
         document.getElementById("body").appendChild(this.markerParent);
 
@@ -117,11 +120,12 @@ class Marker {
 
 let currentMarkerData = JSON.parse(localStorage.getItem("currentMarkerData"));
 for (const marker of currentMarkerData) {
-    let markerObject = new Marker({x: marker.x, y: marker.y}, marker.ogWidth, marker.ogHeight);
+    let markerObject = new Marker({x: marker.x, y: marker.y}, marker.ogWidth, marker.ogHeight, marker.text);
     markers.push(markerObject);
-
-    renderMarkers(pos);
 }
+
+
+renderMarkers(pos);
 
 
 var markerButton = document.getElementById("Marker Button");
@@ -176,7 +180,7 @@ function placeMarker(e) {
     let distanceFromCenter = {x: window.innerWidth/2 - mousePos.x, y: window.innerHeight/2 - mousePos.y};
     let markerPos = {x: pos.x - (1/cx * distanceFromCenter.x), y: pos.y - (1/cy * distanceFromCenter.y)};
 
-    let marker = new Marker(markerPos);
+    let marker = new Marker(markerPos, img.offsetWidth, img.offsetHeight, "");
 
     markers.push(marker);
 
@@ -201,10 +205,11 @@ function renderMarkers(lensPos) {
     let bottomBoundary = lensPos.y + lens.offsetHeight/2;
 
     for (const marker of markers) {
-        if (leftBoundary < marker.x && marker.x < rightBoundary && topBoundary < marker.y && marker.y < bottomBoundary) {
+        let actualX = marker.x * (img.offsetWidth / marker.ogWidth);
+        let actualY = marker.y * (img.offsetHeight / marker.ogHeight);
+
+        if (leftBoundary < actualX && actualX < rightBoundary && topBoundary < actualY && actualY < bottomBoundary) {
             marker.markerParent.style.display = "block";
-            let actualX = marker.x * img.offsetWidth / marker.ogWidth;
-            let actualY = marker.x * img.offsetHeight / marker.ogHeight;
 
             let distanceFromCenter = {x: lensPos.x - actualX, y: lensPos.y - actualY};
             let realPos = {x: window.innerWidth/2 - (cx * distanceFromCenter.x), y: window.innerHeight/2 - (cy * distanceFromCenter.y)};

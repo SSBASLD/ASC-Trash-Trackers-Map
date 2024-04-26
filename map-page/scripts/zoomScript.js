@@ -1,4 +1,4 @@
-let currentZoom = 3;
+let currentZoom = 8;
 
 var result = document.getElementById("myresult");
 var img = document.getElementById("myimage1");
@@ -6,16 +6,19 @@ var img = document.getElementById("myimage1");
 var lens;
 lens = document.createElement("DIV");
 lens.setAttribute("class", "img-zoom-lens");
-lens.style.height = `${img.offsetHeight / currentZoom}px`;
-lens.style.width = `${img.offsetHeight / currentZoom * 2}px`;
+lens.style.height = `${window.innerHeight / currentZoom}px`;
+lens.style.width = `${window.innerWidth / currentZoom}px`;
 
-var pos = {x: lens.offsetWidth/2, y: lens.offsetHeight/2};
+let lensHeight = window.innerHeight;
+let lensWidth = window.innerWidth;
+
+var pos = {x: lensWidth / currentZoom / 2, y: lensHeight / currentZoom / 2};
 var drag = false;
 var ogPos = {x: 0, y: 0};
 var lensOgPos = {x: 0, y: 0};
 
-lens.style.left = img.offsetHeight / currentZoom + "px";
-lens.style.top = img.offsetHeight / currentZoom * 2 + "px";
+lens.style.left = pos.x + "px";
+lens.style.top = pos.y + "px";
 
 var cx, cy;
 function imageZoom(adjust) {
@@ -80,8 +83,19 @@ var slider = document.getElementById("Zoom Slider");
 slider.oninput = function() {
     let currentZoom = this.value;
 
-    lens.style.height = `${img.offsetHeight / currentZoom}px`;
-    lens.style.width = `${img.offsetHeight / currentZoom * (window.innerWidth/window.innerHeight)}px`;
+    let zoomedWidth = lensWidth / currentZoom;
+    let zoomedHeight = lensHeight / currentZoom;
+
+    console.log(zoomedWidth);
+
+    if (zoomedWidth > img.offsetWidth) {
+        zoomedWidth = img.offsetWidth;
+        zoomedHeight = zoomedWidth * window.innerHeight/window.innerWidth;
+    }
+
+    lens.style.height = `${zoomedHeight}px`;
+    lens.style.width = `${zoomedWidth}px`;
+
     imageZoom(adjust = true);
     renderMarkers(pos);
 }

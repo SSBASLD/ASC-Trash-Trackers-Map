@@ -42,9 +42,8 @@ async function setUpSocket() {
                     case "FetchResponse": {
                         let response = jsonData.data;
 
-                        console.log(response);
-
                         setUpPreviews(response);
+                        enable();
                         break;
                     } case "AcknowledgeResponse": {
                         window.location.reload();

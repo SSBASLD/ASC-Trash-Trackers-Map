@@ -1,4 +1,13 @@
 let saveIcon = document.getElementById("Save Icon");
+function saveIconEnable() {
+    saveIcon.style.pointerEvents = "auto";
+    saveIcon.style.opacity = "1";
+}
+
+function saveIconDisable() {
+    saveIcon.style.pointerEvents = "none";
+    saveIcon.style.opacity = "0.2";
+}
 
 saveIcon.addEventListener("mouseover", (e) => {
     saveIcon.classList.add("save-icon-hover");
@@ -31,8 +40,8 @@ function markerDataToJSON() {
 
         markerData.text = marker.text ? marker.text : "";
 
-        markerData.ogWidth = img.offsetWidth;
-        markerData.ogHeight = img.offsetHeight;
+        markerData.ogWidth = marker.ogWidth;
+        markerData.ogHeight = marker.ogHeight;
 
         markersData.push(markerData);
     }

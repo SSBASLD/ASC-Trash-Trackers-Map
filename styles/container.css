@@ -6,10 +6,10 @@
     --numberInRow: 2;
     --widthCalc: calc(calc(100vw - 2vw - (var(--numberInRow)*1vw - 1vw)) / var(--numberInRow));
 
-    top: calc(2vw + calc(2vw + 1/1.8 * var(--widthCalc))*var(--layer));
+    top: calc(2vw + calc(2vw + 653/986 * var(--widthCalc))*var(--layer));
 
     width: var(--widthCalc);
-    height: calc(1/1.8*var(--widthCalc));
+    height: calc(653/986*var(--widthCalc));
 
     border-width: 0.3vw;
     border-color: black;
