@@ -97,8 +97,8 @@ slider.oninput = function() {
             zoomedWidth = zoomedHeight * window.innerWidth/window.innerHeight;
         } 
     } else if (window.innerWidth > window.innerHeight) {
-        if (zoomedWidth > img.offsetWidth) {
-            zoomedWidth = img.offsetWidth;
+        if (zoomedWidth > imgWidth) {
+            zoomedWidth = imgWidth;
             zoomedHeight = zoomedWidth * window.innerHeight/window.innerWidth;
         } 
     }   
