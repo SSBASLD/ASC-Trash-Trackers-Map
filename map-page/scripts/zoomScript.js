@@ -8,8 +8,8 @@ lens = document.createElement("DIV");
 lens.setAttribute("class", "img-zoom-lens");
 img.parentElement.insertBefore(lens, img);
 
-let imgWidth;
-let imgHeight;
+let imgWidth = 0;
+let imgHeight = 0;
 while (imgWidth == 0 && imgHeight == 0) {
     imgHeight = img.offsetHeight;
     imgWidth = img.offsetWidth;
